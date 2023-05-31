@@ -23,11 +23,9 @@ import time
 #         file.writelines(updated_lines)
 
 
-import os
-
 def insert_makefile_content(project_info):
     makefile_path = './templets/makefile/Makefile'
-    output_dir = './'
+    output_dir = f"./{project_info['name']}"
 
     with open(makefile_path, 'r') as file:
         lines = file.readlines()
@@ -37,23 +35,22 @@ def insert_makefile_content(project_info):
     for line in lines:
         for variable in variables:
             if line.startswith(variable):
-                updated_line = line.strip()
                 if variable == 'NAME':
-                    updated_line += ' ' + project_info.get('proj_name', '') + '\n'
+                    updated_line = variable + '     = ' + project_info.get('name', '') + '\n'
                 elif variable == 'SRC':
-                    updated_line += ' ' + project_info.get('file_name', '') + '\n'
+                    src_files = ' '.join(project_info.get('src_files', []))
+                    updated_line = variable + '      = ' + src_files + '\n'
                 elif variable == 'HEADER':
-                    updated_line += ' ' + project_info.get('h_files', '') + '\n'
-                updated_lines.append(updated_line)
+                    header_files = ' '.join(project_info.get('h_files', []))
+                    updated_line = variable + '   = ' + header_files + '\n'
                 break
         else:
-            updated_lines.append(line)
+            updated_line = line
+        updated_lines.append(updated_line)
 
     output_file = os.path.join(output_dir, os.path.basename(makefile_path))
     with open(output_file, 'w') as file:
         file.writelines(updated_lines)
-
-
 
 
 def create_cpp_class(project_info):
@@ -68,38 +65,36 @@ def create_cpp_class(project_info):
             project_info['class_h_files'] += header_file
             source_file = class_name + ".cpp"
             project_info['class_src_files'] += source_file
-            file = open(f"./{project_info['proj_name']}/includes/{header_file}", "x")
-            file = open(f"./{project_info['proj_name']}/src/{source_file}", "x")
+            file = open(f"./{project_info['name']}/includes/{header_file}", "x")
+            file = open(f"./{project_info['name']}/src/{source_file}", "x")
             i += 1
 
 def create_project_basics(project_info):
     i = 1
 
-    os.makedirs(project_info['proj_name'])
-    os.makedirs(f"./{project_info['proj_name']}/src")
-    os.makedirs(f"./{project_info['proj_name']}/includes")
+    os.makedirs(project_info['name'])
+    os.makedirs(f"./{project_info['name']}/src")
+    os.makedirs(f"./{project_info['name']}/includes")
     print("\nEnter the number of source files needed in the project")
     num_files = int(input("(You can create the files for you classes later!):"))
     project_info['num_src_files'] = num_files
-    exec_names = []
-
-    name = project_info['file_name']
+    project_info['src_files'] = []
     while i <= num_files:
-        file_name = input(f"Enter the file name (without extension) for file {i}: ")
+        src_files = input(f"Enter the file name (without extension) for file {i}: ")
         if language == "python":
-            file_name += ".py"
+            src_files += ".py"
         elif language == "c":
-            file_name += ".c"
+            src_files += ".c"
         elif language == "cpp" or language == "c++":
-            file_name += ".cpp"
-        name += file_name
-        file = open(f"./{project_info['proj_name']}/src/{file_name}", "x")
+            src_files += ".cpp"
+        project_info['src_files'].append(src_files)
+        file = open(f"./{project_info['name']}/src/{src_files}", "x")
         i += 1
 
 def create_makefile(project_info):
     need_makefile = input("Do you need a Makefile? (y/n): ").lower() == "y"
     if need_makefile:
-        file = open(f"./{project_info['proj_name']}/Makefile", "x")
+        file = open(f"./{project_info['name']}/Makefile", "x")
         insert_makefile_content(project_info)
 
 def create_header_files(project_info):
@@ -107,11 +102,12 @@ def create_header_files(project_info):
 
     print("\nEnter the number of header files needed in the project")
     num_files = int(input("(You can create the header files for you classes later!):"))
+    project_info['h_files'] = []
     while i <= num_files:
-        file_name = input(f"Enter the file name (without extension) for file {i}: ")
-        file_name += ".h"
-        project_info['h_files'] += file_name
-        file = open(f"./{project_info['proj_name']}/includes/{file_name}", "x")
+        src_files = input(f"Enter the file name (without extension) for file {i}: ")
+        src_files += ".h"
+        project_info['h_files'].append(src_files)
+        file = open(f"./{project_info['name']}/includes/{src_files}", "x")
         i += 1
 
 # def create_py_project():
@@ -120,7 +116,7 @@ def create_header_files(project_info):
 
 def create_cpp_project(project_info):
     project_name = input("Enter the name of the project: ")
-    project_info['proj_name'] = project_name
+    project_info['name'] = project_name
     create_project_basics(project_info)
     create_header_files(project_info)
     create_makefile(project_info)
@@ -131,12 +127,12 @@ def create_cpp_project(project_info):
 #     print("create c project")
 
 
-project_info = {'file_name': '', 'h_files': '', 'class_h_files': '', 'class_src_files': ''}
+project_info = {'src_files': '', 'h_files': ''}
 while True:
     language = input("Enter the programming language (c, c++, python): ")
 
     if language == "c++":
-        project_info['pro_lang'] = "c++"
+        project_info['language'] = "c++"
         create_cpp_project(project_info)
         break
     # elif language == "c++":
