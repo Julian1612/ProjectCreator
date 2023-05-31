@@ -1,27 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    main.py                                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jschneid <jschneid@student.42heilbronn.    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/31 15:55:12 by jschneid          #+#    #+#              #
+#    Updated: 2023/05/31 16:11:06 by jschneid         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 import os
 import shutil
 import time
-
-# def insert_makefile_content(project_info):
-#     with open("./templets/makefile/Makefile", 'r') as file:
-#         lines = file.readlines()
-
-#     variables = ['NAME', 'SRC', 'HEADER']
-#     updated_lines = []
-#     for line in lines:
-#         for variable in variables:
-#             if line.startswith(variable):
-#                 updated_line = line.strip()
-#                 updated_line += ' ' + project_info.get(variable, '') + '\n'
-#                 updated_lines.append(updated_line)
-#                 break
-#         else:
-#             updated_lines.append(line)
-
-#     output_file = os.path.join("./", os.path.basename("./Makefile"))
-#     with open(output_file, 'w') as file:
-#         file.writelines(updated_lines)
-
 
 def insert_makefile_content(project_info):
     makefile_path = './templets/makefile/Makefile'
@@ -52,19 +43,20 @@ def insert_makefile_content(project_info):
     with open(output_file, 'w') as file:
         file.writelines(updated_lines)
 
-
 def create_cpp_class(project_info):
     i = 1
 
     need_makefile = input("Do you need a Class? (y/n): ").lower() == "y"
     if need_makefile:
         num_files = int(input("\nEnter the number of Classes you need in the project"))
+        # project_info['h_files'] = []
+        # project_info['src_files'] = []
         while i <= num_files:
             class_name = input("Enter the name of the C++ Class: ")
             header_file = class_name + ".hpp"
-            project_info['class_h_files'] += header_file
+            project_info['h_files'].append(header_file)
             source_file = class_name + ".cpp"
-            project_info['class_src_files'] += source_file
+            project_info['src_files'].append(source_file)
             file = open(f"./{project_info['name']}/includes/{header_file}", "x")
             file = open(f"./{project_info['name']}/src/{source_file}", "x")
             i += 1
@@ -119,8 +111,8 @@ def create_cpp_project(project_info):
     project_info['name'] = project_name
     create_project_basics(project_info)
     create_header_files(project_info)
-    create_makefile(project_info)
     create_cpp_class(project_info)
+    create_makefile(project_info)
 
 # def create_c_project():
 #     create_project_basics("c++")
@@ -143,3 +135,4 @@ while True:
     #     break
     else:
         print("Invalid input. Please try again.")
+print(project_info)
