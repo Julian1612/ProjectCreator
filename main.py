@@ -1,6 +1,5 @@
 import os
 import shutil
-import pyautogui
 import time
 
 def create_cpp_class(project_name):
