@@ -18,7 +18,7 @@ class Templet
 		std::string getType() const;
 
 		// Member functions
-		void	makeSound(void) const;
+
 	private:
 
 	protected:
