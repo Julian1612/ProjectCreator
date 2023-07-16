@@ -1,0 +1,37 @@
+Program Sequence:
+
+Class Info
+	str	projectName
+	str	language
+	int	amountSourceCodeFiles
+	str	nameSourceCodeFiles
+	int	amountHeaderfiles
+	str	namesHeaderfiles
+	int	amountClasses
+	str	classNames
+
+	getProjectName()
+	getLanguage()
+	getNumSourceCodeFiles()
+	getNamesSourceCodeFiles()
+	getNumHeaderfiles()
+	getNamesHeaderfiles()
+	getNumClasses()
+	getClassName()
+
+Function getProjectDetails()
+	- get project name
+	- get the language of the project
+	- get the amount and name of source files
+	- get the amount and name of headerfiles
+	- get the amount of classes in the project
+	- get the names of the classes
+
+Function createAllFiles()
+	createAllSourceFiles();
+	createAllClassFiles();
+	createMakefile();
+
+getProjectDetails();
+createAllDirectories();
+createAllFiles();

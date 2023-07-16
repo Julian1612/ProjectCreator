@@ -1,20 +1,20 @@
-#ifndef MID_HPP
-# define MID_HPP
+#ifndef XXX_HPP
+# define XXX_HPP
 
 // Includes
 
-class Mid
+class Xxx
 {
 	public:
 		// Constructors
-		Mid();
-		Mid(const Mid &copy);
+		Xxx();
+		Xxx(const Xxx &copy);
 
 		// Destructor
-		~Mid();
+		~Xxx();
 
 		// Operators
-		Mid & operator=(const Mid &assign);
+		Xxx & operator=(const Xxx &assign);
 
 		// Getters / Setters
 

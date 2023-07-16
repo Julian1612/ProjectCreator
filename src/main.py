@@ -11,6 +11,9 @@ def createProjectDirectory():
 def createSourceCodeFiles():
 	for i in range(info.amountSourceCodeFiles):
 		file = open(f"./{info.projectName}/src/{info.nameSourceCodeFiles[i]}.cpp", "w+")
+		if (info.nameSourceCodeFiles[i] == "main"):
+			with open(f"./{info.projectName}/src/{info.nameSourceCodeFiles[i]}.cpp", "w") as file:
+				file.write("#include <iostream>\n\nint main(int argc, char* argv[]) {\n\n\treturn 0;\n}\n")
 		file.close()
 
 # create the header files

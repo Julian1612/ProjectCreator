@@ -1,15 +1,15 @@
-#include "Mid.hpp"
+#include "Xxx.hpp"
 
 // Constructors
-Mid::Mid(void) {
+Xxx::Xxx(void) {
 }
 
-Mid::Mid(const Mid &copy) {
+Xxx::Xxx(const Xxx &copy) {
 	*this = copy;
 }
 
 // Destructor
-Mid::~Mid() {
+Xxx::~Xxx() {
 
 }
 
