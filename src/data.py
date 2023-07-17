@@ -1,6 +1,10 @@
+import json
+import os
+
 class Info:
     def __init__(self):
         self.getProjectName()
+        self.getGitRepo()
         # self.getLanguage()
         self.getNumSourceCodeFiles()
         self.getNamesSourceCodeFiles(self.amountSourceCodeFiles)
@@ -8,6 +12,23 @@ class Info:
         self.getNamesHeaderfiles(self.amountHeaderfiles)
         self.getNumClasses()
         self.getClassName(self.amountClasses)
+
+    def getGitRepo(self):
+        while True:
+            self.gitRepo = input("You want to create a git repository (y/n): ")
+            if self.gitRepo.lower() == 'y' or self.gitRepo.lower() == 'n':
+                break
+            else:
+                print("Invalid input. Please try again.")
+        while True:
+            self.repoDescription = input("You want to add a description (y/n): ")
+            if self.repoDescription.lower() == 'y':
+                self.repoDescription = input("Enter the description: ")
+                break
+            elif self.repoDescription.lower() == 'n':
+                break
+            else:
+                print("Invalid input. Please try again.")
 
     def getProjectName(self):
         while True:
@@ -82,6 +103,14 @@ class Info:
                 except ValueError:
                     print("Invalid input. Please try again.")
 
+    def getAccesToken(self):
+        script_dir = os.path.dirname(os.path.realpath(__file__))
+        configPath = os.path.join(script_dir, "../config.json")
+        with open(configPath) as config_file:
+            config = json.load(config_file)
+            self.accesToken = config["access_token"]
+        return self.accesToken
+
     def printUserInfo(self):
         print(self.projectName)
         print(self.language)
@@ -93,6 +122,9 @@ class Info:
         print(self.classNames)
         print("Info initialized")
 
+    gitRepo: str
+    repoDescription: str
+    accesToken: str
     projectName: str
     language: str
     amountSourceCodeFiles: int
