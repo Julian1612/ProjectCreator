@@ -116,7 +116,8 @@ def pushToGitRepo():
 	os.system("git push")
 
 # add acces token
-def addAccesToken():
+# @todo add try catch to add acces token
+def addAccessToken():
 	print("Please add your github acces token")
 	personal_access_token = input("Enter your acces token: ")
 	script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -128,9 +129,9 @@ def addAccesToken():
 		json.dump(config, config_file)
 
 def createGitRepo():
-	if info.getAccesToken() == "":
-		addAccesToken()
-	personal_access_token = info.getAccesToken()
+	if info.getAccessToken() == "":
+		addAccessToken()
+	personal_access_token = info.getAccessToken()
 	api_base_url = "https://api.github.com"
 	data = {
 		"name": info.projectName,
@@ -145,13 +146,12 @@ def createGitRepo():
 		clone_url = repo_data["clone_url"]
 		print("Successfully created repository")
 		print(f"Clone URL: {clone_url}")
+		os.system("git init")
+		os.system(f"git clone {clone_url}")
 	else:
 		print("Failed to create repository")
-	os.system("git init")
-	os.system(f"git clone {clone_url}")
 
 info = Info()
-print(info.gitRepo)
 if (info.gitRepo == "y"):
 	createGitRepo()
 else:

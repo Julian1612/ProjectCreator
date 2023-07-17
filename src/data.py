@@ -103,13 +103,21 @@ class Info:
                 except ValueError:
                     print("Invalid input. Please try again.")
 
-    def getAccesToken(self):
+    def getAccessToken(self):
         script_dir = os.path.dirname(os.path.realpath(__file__))
-        configPath = os.path.join(script_dir, "../config.json")
-        with open(configPath) as config_file:
+        config_path = os.path.join(script_dir, "../config.json")
+
+        if not os.path.exists(config_path):
+            # Create the file if it doesn't exist
+            with open(config_path, 'w') as config_file:
+                config_file.write('{"access_token": ""}')
+
+        with open(config_path) as config_file:
             config = json.load(config_file)
-            self.accesToken = config["access_token"]
-        return self.accesToken
+            self.accessToken = config["access_token"]
+
+        return self.accessToken
+
 
     def printUserInfo(self):
         print(self.projectName)
