@@ -54,23 +54,30 @@ def createMakefile():
 
 # modify template cpp file
 def modifyTemplateCppFile():
+	script_dir = os.path.dirname(os.path.realpath(__file__))
+	template_path = os.path.join(script_dir, "../templets/cppClassTemp/srcFileTemp/cppSrcTemp.cpp")
 	for i in range(info.amountClasses):
-		with open(f"../templets/cppClassTemp/srcFileTemp/cppSrcTemp.cpp", "r") as file:
+		with open(template_path, "r") as file:
 			data = file.read()
 		modifiedTemplate = data.replace("Xxx", info.classNames[i])
 		modifiedTemplate = modifiedTemplate.replace("XXX", info.classNames[i].upper())
 		with open(f"./{info.projectName}/src/{info.classNames[i]}.cpp", "w") as file:
 			file.write(modifiedTemplate)
 
+
 # modify template header file
 def modifyTemplateHeaderFile():
+	script_dir = os.path.dirname(os.path.realpath(__file__))
+	template_path = os.path.join(script_dir, "../templets/cppClassTemp/headerTemp/HeaderTemp.h")
+
 	for i in range(info.amountClasses):
-		with open(f"../templets/cppClassTemp/headerTemp/HeaderTemp.h", "r") as file:
+		with open(template_path, "r") as file:
 			data = file.read()
 		modifiedTemplate = data.replace("Xxx", info.classNames[i])
 		modifiedTemplate = modifiedTemplate.replace("XXX", info.classNames[i].upper())
 		with open(f"./{info.projectName}/include/{info.classNames[i]}.h", "w") as file:
 			file.write(modifiedTemplate)
+
 
 info = Info()
 createProjectDirectory()
