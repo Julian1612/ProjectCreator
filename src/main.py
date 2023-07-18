@@ -111,8 +111,8 @@ def pushToGitRepo():
 	os.system("git commit -m \"Initial commit\"")
 	os.system("git push")
 
+# Regular expression pattern to match GitHub access token format
 def is_valid_access_token(token):
-    # Regular expression pattern to match GitHub access token format
 	if (len(token) != 40):
 		return False
 	return True
@@ -152,8 +152,7 @@ def createGitRepo():
 		"private": False
 	}
 	response = requests.post(f"{api_base_url}/user/repos", json=data, headers={
-		"Authorization": f"Bearer {personal_access_token}"
-	})
+		"Authorization": f"Bearer {personal_access_token}"})
 	if response.status_code == 201:
 		repo_data = response.json()
 		clone_url = repo_data["clone_url"]
@@ -163,11 +162,56 @@ def createGitRepo():
 		print(colored("Successfully cloned repository", "green"))
 		return True
 	else:
+		addAccessToken()
 		print(colored("Failed to create repository", "red"))
 		print(colored("Try to add a valid GitHub access token", "red"))
 		return False
 
-# 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
+def modifyTemplateMakefile():
+	script_dir = os.path.dirname(os.path.realpath(__file__))
+	template_path = os.path.join(script_dir, "../templets/Makefiles/makefileCppTemp.txt")
+	with open(template_path, "r") as file:
+		data = file.read()
+	modifiedTemplate = data.replace("projectName", info.projectName)
+	srcFiles = ""
+	counter = 0
+	for i in range(info.amountSourceCodeFiles):
+		srcFiles += info.nameSourceCodeFiles[i] + ".cpp"
+		srcFiles += " "
+		if (counter == 5):
+			srcFiles += "\\\n\t\t\t"
+			counter = 0
+		counter += 1
+	for i in range(info.amountClasses):
+		srcFiles += info.classNames[i] + ".cpp"
+		srcFiles += " "
+		if (counter == 5):
+			srcFiles += "\\\n\t\t\t"
+			counter = 0
+		counter += 1
+	modifiedTemplate = modifiedTemplate.replace("cppFiles...", srcFiles)
+	headerfiles = ""
+	counter = 0
+	for i in range(info.amountHeaderfiles):
+		headerfiles += info.namesHeaderfiles[i] + ".h"
+		headerfiles += " "
+		if (counter == 5):
+			headerfiles += "\\\n\t\t\t"
+			counter = 0
+		counter += 1
+	for i in range(info.amountClasses):
+		headerfiles += info.classNames[i] + ".h"
+		headerfiles += " "
+		if (counter == 5):
+			headerfiles += "\\\n\t\t\t"
+			counter = 0
+		counter += 1
+	modifiedTemplate = modifiedTemplate.replace("hppFiles...", headerfiles)
+	with open(f"./{info.projectName}/Makefile", "w") as file:
+		file.write(modifiedTemplate)
+
+#@todo wenn input the file names it should not be possible to enter a file name with a space
+#@todo when input the file names it should not be possible to enter just a space
 info = Info()
 if (info.gitRepo == "y"):
 	if(createGitRepo() == False):
@@ -183,5 +227,6 @@ createClasses()
 createMakefile()
 modifyTemplateCppFile()
 modifyTemplateHeaderFile()
+modifyTemplateMakefile()
 if (info.gitRepo == "y"):
 	pushToGitRepo()

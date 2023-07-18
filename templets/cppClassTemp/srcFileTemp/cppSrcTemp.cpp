@@ -1,4 +1,4 @@
-#include "Xxx.hpp"
+#include "Xxx.h"
 
 // Constructors
 Xxx::Xxx(void) {

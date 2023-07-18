@@ -1,5 +1,5 @@
-#ifndef XXX_HPP
-# define XXX_HPP
+#ifndef XXX_H
+# define XXX_H
 
 // Includes
 
