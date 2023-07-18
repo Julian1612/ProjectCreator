@@ -16,8 +16,10 @@ class Info:
     def getGitRepo(self):
         while True:
             self.gitRepo = input("You want to create a git repository (y/n): ")
-            if self.gitRepo.lower() == 'y' or self.gitRepo.lower() == 'n':
+            if self.gitRepo.lower() == 'y':
                 break
+            elif self.gitRepo.lower() == 'n':
+                return
             else:
                 print("Invalid input. Please try again.")
         while True:

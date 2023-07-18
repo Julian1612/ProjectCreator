@@ -1,4 +1,5 @@
 from data import Info
+from termcolor import colored
 import requests
 import os
 import json
@@ -11,27 +12,24 @@ def createProjectDirectory():
 	os.mkdir(f"./{info.projectName}/include")
 
 # create the source code files
-# create the source code files
 def createSourceCodeFiles():
 	src_directory = f"./{info.projectName}/src"
-
-	# Create the src directory if it doesn't exist
 	if not os.path.exists(src_directory):
 		os.mkdir(src_directory)
-
 	for i in range(info.amountSourceCodeFiles):
 		file_path = f"{src_directory}/{info.nameSourceCodeFiles[i]}.cpp"
 		file = open(file_path, "w+")
-
 		if (info.nameSourceCodeFiles[i] == "main"):
 			with open(file_path, "w") as file:
 				file.write("#include <iostream>\n\nint main(int argc, char* argv[]) {\n\n\treturn 0;\n}\n")
 
 		file.close()
 
-
 # create the header files
 def createHeaderFiles():
+	includesDirectory = f"./{info.projectName}/include"
+	if not os.path.exists(includesDirectory):
+		os.mkdir(includesDirectory)
 	for i in range(info.amountHeaderfiles):
 		file = open(f"./{info.projectName}/include/{info.namesHeaderfiles[i]}.h", "w+")
 		file.close()
@@ -53,7 +51,6 @@ def createGitignore():
 		file.write("./obj\n")
 	file.close()
 
-# create classes
 # create classes
 def createClasses():
 	src_directory = f"./{info.projectName}/src"
@@ -107,7 +104,6 @@ def modifyTemplateHeaderFile():
 		with open(f"./{info.projectName}/include/{info.classNames[i]}.h", "w") as file:
 			file.write(modifiedTemplate)
 
-# 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
 # create git repo
 def pushToGitRepo():
 	os.chdir(f"./{info.projectName}")
@@ -115,18 +111,35 @@ def pushToGitRepo():
 	os.system("git commit -m \"Initial commit\"")
 	os.system("git push")
 
-# add acces token
-# @todo add try catch to add acces token
+def is_valid_access_token(token):
+    # Regular expression pattern to match GitHub access token format
+	if (len(token) != 40):
+		return False
+	return True
+
 def addAccessToken():
-	print("Please add your github acces token")
-	personal_access_token = input("Enter your acces token: ")
-	script_dir = os.path.dirname(os.path.realpath(__file__))
-	configPath = os.path.join(script_dir, "../config.json")
-	with open(configPath) as config_file:
-		config = json.load(config_file)
-		config["access_token"] = personal_access_token
-	with open(configPath, "w") as config_file:
-		json.dump(config, config_file)
+    print("Please add your GitHub access token")
+    while True:
+        try:
+            personal_access_token = input("Enter your access token: ")
+            if is_valid_access_token(personal_access_token):
+                break
+            else:
+                print("Invalid access token format. Please try again.")
+        except Exception as e:
+            print(f"Error: {e}")
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    configPath = os.path.join(script_dir, "../config.json")
+    try:
+        with open(configPath) as config_file:
+            config = json.load(config_file)
+            config["access_token"] = personal_access_token
+        with open(configPath, "w") as config_file:
+            json.dump(config, config_file)
+        print(colored("Access token added successfully!", "green"))
+    except Exception as e:
+        print(f"Error: {e}")
+
 
 def createGitRepo():
 	if info.getAccessToken() == "":
@@ -144,16 +157,21 @@ def createGitRepo():
 	if response.status_code == 201:
 		repo_data = response.json()
 		clone_url = repo_data["clone_url"]
-		print("Successfully created repository")
-		print(f"Clone URL: {clone_url}")
+		print(colored("Successfully created repository", "green"))
 		os.system("git init")
 		os.system(f"git clone {clone_url}")
+		print(colored("Successfully cloned repository", "green"))
+		return True
 	else:
-		print("Failed to create repository")
+		print(colored("Failed to create repository", "red"))
+		print(colored("Try to add a valid GitHub access token", "red"))
+		return False
 
+# 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
 info = Info()
 if (info.gitRepo == "y"):
-	createGitRepo()
+	if(createGitRepo() == False):
+		exit()
 else:
 	createProjectDirectory()
 createSourceCodeFiles()
