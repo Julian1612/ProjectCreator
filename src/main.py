@@ -211,7 +211,10 @@ def modifyTemplateMakefile():
 		file.write(modifiedTemplate)
 
 #@todo wenn input the file names it should not be possible to enter a file name with a space
-#@todo when input the file names it should not be possible to enter just a space
+#@todo when input the file names it should not be possible to enter just a space or newline
+#@todo create a class for creating c porjects
+#@todo create a class for creating cpp projects
+#@todo create a class for creating arduino projects
 info = Info()
 if (info.gitRepo == "y"):
 	if(createGitRepo() == False):
