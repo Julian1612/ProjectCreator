@@ -53,3 +53,4 @@ class makefile:
 		modifiedTemplate = modifiedTemplate.replace("hppFiles...", headerfiles)
 		with open(f"./{self.projectD.projectName}/Makefile", "w") as file:
 			file.write(modifiedTemplate)
+

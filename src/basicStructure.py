@@ -10,6 +10,7 @@ class basic:
 		file = open(f"./{self.projectD.projectName}/README.md", "w+")
 		file.close()
 
+#@todo checken ob ordner schon existiert sont error throwen
 	# create the directory for the project
 	def createProjectDirectory(self):
 		print("Creating project directory")

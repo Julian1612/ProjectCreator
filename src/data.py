@@ -25,8 +25,9 @@ class projectData:
         self.getNamesSourceCodeFiles(self.amountSourceCodeFiles)
         self.getNumHeaderfiles()
         self.getNamesHeaderfiles(self.amountHeaderfiles)
-        self.getNumClasses()
-        self.getClassName(self.amountClasses)
+        if not (self.language == "c"):
+            self.getNumClasses()
+            self.getClassName(self.amountClasses)
 
     # Getters
     def getGitRepo(self):
