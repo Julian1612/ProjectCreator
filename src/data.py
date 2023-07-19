@@ -1,11 +1,26 @@
 import json
 import os
 
-class Info:
+class projectData:
+
+    # Class variables
+    gitRepo: str
+    repoDescription: str
+    accesToken: str
+    projectName: str
+    language: str
+    amountSourceCodeFiles: int
+    nameSourceCodeFiles: list
+    amountHeaderfiles: int
+    namesHeaderfiles: list
+    amountClasses: int
+    classNames: list
+
+    # Constructor
     def __init__(self):
         self.getProjectName()
         self.getGitRepo()
-        # self.getLanguage()
+        self.getLanguage()
         self.getNumSourceCodeFiles()
         self.getNamesSourceCodeFiles(self.amountSourceCodeFiles)
         self.getNumHeaderfiles()
@@ -13,6 +28,7 @@ class Info:
         self.getNumClasses()
         self.getClassName(self.amountClasses)
 
+    # Getters
     def getGitRepo(self):
         while True:
             self.gitRepo = input("You want to create a git repository (y/n): ")
@@ -117,29 +133,7 @@ class Info:
         with open(config_path) as config_file:
             config = json.load(config_file)
             self.accessToken = config["access_token"]
-
         return self.accessToken
 
 
-    def printUserInfo(self):
-        print(self.projectName)
-        print(self.language)
-        print(self.amountSourceCodeFiles)
-        print(self.nameSourceCodeFiles)
-        print(self.amountHeaderfiles)
-        print(self.namesHeaderfiles)
-        print(self.amountClasses)
-        print(self.classNames)
-        print("Info initialized")
 
-    gitRepo: str
-    repoDescription: str
-    accesToken: str
-    projectName: str
-    language: str
-    amountSourceCodeFiles: int
-    nameSourceCodeFiles: list
-    amountHeaderfiles: int
-    namesHeaderfiles: list
-    amountClasses: int
-    classNames: list
