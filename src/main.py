@@ -3,7 +3,7 @@ from cppProject import cppProject
 from cProject import cProject
 
 #@todo makefile fur c projecte werden noch nicht richtig erstellt
-projectD = projectData()
+projectD = projectData(True)
 if (projectD.language == "cpp"):
 	cppProject = cppProject(projectD)
 	cppProject.createProject()

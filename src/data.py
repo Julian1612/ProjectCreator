@@ -15,19 +15,28 @@ class projectData:
     namesHeaderfiles: list
     amountClasses: int
     classNames: list
+    createClass: bool
 
     # Constructor
-    def __init__(self):
-        self.getProjectName()
-        self.getGitRepo()
-        self.getLanguage()
-        self.getNumSourceCodeFiles()
-        self.getNamesSourceCodeFiles(self.amountSourceCodeFiles)
-        self.getNumHeaderfiles()
-        self.getNamesHeaderfiles(self.amountHeaderfiles)
-        if not (self.language == "c"):
+    def __init__(self, createClass):
+        if createClass:
+            self.getProjectName()
+            self.getGitRepo()
+            self.getLanguage()
+            self.getNumSourceCodeFiles()
+            self.getNamesSourceCodeFiles(self.amountSourceCodeFiles)
+            self.getNumHeaderfiles()
+            self.getNamesHeaderfiles(self.amountHeaderfiles)
+            if not (self.language == "c"):
+                self.getNumClasses()
+                self.getClassName(self.amountClasses)
+            self.createClass = False
+        elif not createClass:
+            self.createClass = True
+            self.getLanguage()
             self.getNumClasses()
             self.getClassName(self.amountClasses)
+
 
     # Getters
     def getGitRepo(self):

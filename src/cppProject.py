@@ -59,18 +59,29 @@ class cppProject(gitHub, makefile, basic):
 				data = file.read()
 			modifiedTemplate = data.replace("Xxx", self.projectD.classNames[i])
 			modifiedTemplate = modifiedTemplate.replace("XXX", self.projectD.classNames[i].upper())
-			with open(f"./{self.projectD.projectName}/src/{self.projectD.classNames[i]}.cpp", "w") as file:
-				file.write(modifiedTemplate)
+			if (self.projectD.createClass == True):
+				currentDir = os.getcwd()
+				include_directory = f"{currentDir}/src"
+				with open(f"{include_directory}/{self.projectD.classNames[i]}.cpp", "w") as file:
+					file.write(modifiedTemplate)
+			else:
+				with open(f"./{self.projectD.projectName}/src/{self.projectD.classNames[i]}.cpp", "w") as file:
+					file.write(modifiedTemplate)
 
 	# modify template header file
 	def modifyTemplateHeaderFile(self):
 		script_dir = os.path.dirname(os.path.realpath(__file__))
 		template_path = os.path.join(script_dir, "../templets/cppClassTemp/headerTemp/HeaderTemp.h")
-
 		for i in range(self.projectD.amountClasses):
 			with open(template_path, "r") as file:
 				data = file.read()
 			modifiedTemplate = data.replace("Xxx", self.projectD.classNames[i])
 			modifiedTemplate = modifiedTemplate.replace("XXX", self.projectD.classNames[i].upper())
-			with open(f"./{self.projectD.projectName}/include/{self.projectD.classNames[i]}.h", "w") as file:
-				file.write(modifiedTemplate)
+			if (self.projectD.createClass == True):
+				currentDir = os.getcwd()
+				include_directory = f"{currentDir}/include"
+				with open(f"{include_directory}/{self.projectD.classNames[i]}.h", "w") as file:
+					file.write(modifiedTemplate)
+			else:
+				with open(f"./{self.projectD.projectName}/include/{self.projectD.classNames[i]}.h", "w") as file:
+					file.write(modifiedTemplate)

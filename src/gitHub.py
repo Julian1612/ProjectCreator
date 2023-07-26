@@ -2,7 +2,7 @@ import os
 import json
 import requests
 from data import projectData
-from termcolor import colored
+# from termcolor import colored
 
 class gitHub:
 	def __init__(self, projectD: projectData):
@@ -40,7 +40,7 @@ class gitHub:
 				config["access_token"] = personal_access_token
 			with open(configPath, "w") as config_file:
 				json.dump(config, config_file)
-			print(colored("Access token added successfully!", "green"))
+			print("Access token added successfully!")
 		except Exception as e:
 			print(f"Error: {e}")
 
@@ -60,13 +60,13 @@ class gitHub:
 		if response.status_code == 201:
 			repo_data = response.json()
 			clone_url = repo_data["clone_url"]
-			print(colored("Successfully created repository", "green"))
+			print("Successfully created repository")
 			os.system("git init")
 			os.system(f"git clone {clone_url}")
-			print(colored("Successfully cloned repository", "green"))
+			print("Successfully cloned repository")
 			return True
 		else:
 			self.addAccessToken()
-			print(colored("Failed to create repository", "red"))
-			print(colored("Try to add a valid GitHub access token", "red"))
+			print("Failed to create repository")
+			print("Try to add a valid GitHub access token")
 			return False

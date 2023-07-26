@@ -1,6 +1,7 @@
 from data import projectData
 import os
 
+#@todo change name form varibale projectDls
 class basic:
 	def __init__(self, projectD: projectData):
 		self.projectD  = projectD
@@ -32,8 +33,13 @@ class basic:
 
 	# create classes
 	def createClasses(self):
-		src_directory = f"./{self.projectD.projectName}/src"
-		include_directory = f"./{self.projectD.projectName}/include"
+		if self.projectD.createClass:
+			currentDir = os.getcwd()
+			src_directory = f"{currentDir}/src"
+			include_directory = f"{currentDir}/include"
+		else:
+			src_directory = f"./{self.projectD.projectName}/src"
+			include_directory = f"./{self.projectD.projectName}/include"
 		if not os.path.exists(src_directory):
 			os.mkdir(src_directory)
 		if not os.path.exists(include_directory):
