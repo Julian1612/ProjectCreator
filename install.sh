@@ -7,6 +7,7 @@ printf "%s" "$script_dir"
 
 # Create the alias line with the dynamic path
 alias_line="alias create='python3 $script_dir/src/main.py'"
+class_alias_line="alias class='python3 $script_dir/src/createClass.py'"
 zshrc_file="$HOME/.zshrc"
 
 # Check if the shell is Zsh
@@ -17,11 +18,20 @@ fi
 
 # Check if the alias already exists in .zshrc
 if grep -Fxq "$alias_line" "$zshrc_file"; then
-    echo "Alias already exists in .zshrc."
+    echo "Alias 'create' already exists in .zshrc."
 else
-    # Add the alias to .zshrc
+    # Add the alias 'create' to .zshrc
     echo "$alias_line" >> "$zshrc_file"
-    echo "Alias added to .zshrc."
+    echo "Alias 'create' added to .zshrc."
+fi
+
+# Check if the 'class' alias already exists in .zshrc
+if grep -Fxq "$class_alias_line" "$zshrc_file"; then
+    echo "Alias 'class' already exists in .zshrc."
+else
+    # Add the 'class' alias to .zshrc
+    echo "$class_alias_line" >> "$zshrc_file"
+    echo "Alias 'class' added to .zshrc."
 fi
 
 # Check if Python 3 is installed
