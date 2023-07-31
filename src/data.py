@@ -6,6 +6,7 @@ class projectData:
     # Class variables
     gitRepo: str
     repoDescription: str
+    repoIsPrivate: bool
     accesToken: str
     projectName: str
     language: str
@@ -25,8 +26,9 @@ class projectData:
             self.getLanguage()
             self.getNumSourceCodeFiles()
             self.getNamesSourceCodeFiles(self.amountSourceCodeFiles)
-            self.getNumHeaderfiles()
-            self.getNamesHeaderfiles(self.amountHeaderfiles)
+            if not (self.language.lower() == "python"):
+                self.getNumHeaderfiles()
+                self.getNamesHeaderfiles(self.amountHeaderfiles)
             if not (self.language == "c"):
                 self.getNumClasses()
                 self.getClassName(self.amountClasses)
@@ -37,8 +39,6 @@ class projectData:
             self.getNumClasses()
             self.getClassName(self.amountClasses)
 
-
-    # Getters
     def getGitRepo(self):
         while True:
             self.gitRepo = input("You want to create a git repository (y/n): ")
@@ -48,6 +48,18 @@ class projectData:
                 return
             else:
                 print("Invalid input. Please try again.")
+
+        while True:
+            self.repoIsPrivate = False  # Initialize as False by default
+            private_input = input("Do you want to create a private repository? (y/n): ")
+            if private_input.lower() == 'y':
+                self.repoIsPrivate = True
+                break
+            elif private_input.lower() == 'n':
+                break
+            else:
+                print("Invalid input. Please try again.")
+
         while True:
             self.repoDescription = input("You want to add a description (y/n): ")
             if self.repoDescription.lower() == 'y':
@@ -144,6 +156,3 @@ class projectData:
             config = json.load(config_file)
             self.accessToken = config["access_token"]
         return self.accessToken
-
-
-

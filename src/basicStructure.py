@@ -17,7 +17,7 @@ class basic:
 		print("Creating project directory")
 		os.mkdir(f"./{self.projectD.projectName}")
 		os.mkdir(f"./{self.projectD.projectName}/src")
-		os.mkdir(f"./{self.projectD.projectName}/include")
+		os.mkdir(f"./{self.projectD.projectName}/includes")
 
 	# create the documentation file
 	def createDocumentation(self):
@@ -31,23 +31,23 @@ class basic:
 			file.write("./obj\n")
 		file.close()
 
-	# create classes
-	def createClasses(self):
-		if self.projectD.createClass:
-			currentDir = os.getcwd()
-			src_directory = f"{currentDir}/src"
-			include_directory = f"{currentDir}/include"
-		else:
-			src_directory = f"./{self.projectD.projectName}/src"
-			include_directory = f"./{self.projectD.projectName}/include"
-		if not os.path.exists(src_directory):
-			os.mkdir(src_directory)
-		if not os.path.exists(include_directory):
-			os.mkdir(include_directory)
-		for i in range(self.projectD.amountClasses):
-			src_file_path = f"{src_directory}/{self.projectD.classNames[i]}.cpp"
-			include_file_path = f"{include_directory}/{self.projectD.classNames[i]}.h"
-			src_file = open(src_file_path, "w+")
-			include_file = open(include_file_path, "w+")
-			src_file.close()
-			include_file.close()
+	# # create classes
+	# def createClasses(self):
+	# 	if self.projectD.createClass:
+	# 		currentDir = os.getcwd()
+	# 		src_directory = f"{currentDir}/src"
+	# 		include_directory = f"{currentDir}/include"
+	# 	else:
+	# 		src_directory = f"./{self.projectD.projectName}/src"
+	# 		include_directory = f"./{self.projectD.projectName}/include"
+	# 	if not os.path.exists(src_directory):
+	# 		os.mkdir(src_directory)
+	# 	if not os.path.exists(include_directory):
+	# 		os.mkdir(include_directory)
+	# 	for i in range(self.projectD.amountClasses):
+	# 		src_file_path = f"{src_directory}/{self.projectD.classNames[i]}.cpp"
+	# 		include_file_path = f"{include_directory}/{self.projectD.classNames[i]}.h"
+	# 		src_file = open(src_file_path, "w+")
+	# 		include_file = open(include_file_path, "w+")
+	# 		src_file.close()
+	# 		include_file.close()

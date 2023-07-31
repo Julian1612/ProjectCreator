@@ -2,6 +2,7 @@
 
 // Constructors
 Xxx::Xxx(void) {
+
 }
 
 Xxx::Xxx(const Xxx &copy) {

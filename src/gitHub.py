@@ -53,7 +53,7 @@ class gitHub:
 		data = {
 			"name": self.projectD.projectName,
 			"description": self.projectD.repoDescription,
-			"private": False
+			"private": self.projectD.repoIsPrivate
 		}
 		response = requests.post(f"{api_base_url}/user/repos", json=data, headers={
 			"Authorization": f"Bearer {personal_access_token}"})
