@@ -27,7 +27,7 @@ cd ProjectCreator
 ./install.sh
 ```
 ### Usage
-Creating a New Project
+## Creating a New Project
 To create a new project, follow these steps:
 
 1. Open your terminal.
@@ -41,7 +41,7 @@ create
 ```
 Follow the instructions provided to set up your new project.
 
-### Creating a New Class
+## Creating a New Class
 To create a new class, follow these steps:
 
 1. Open your terminal.
