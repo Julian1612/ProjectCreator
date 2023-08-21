@@ -6,9 +6,9 @@ Welcome to ProjectCreator! This is a useful tool to streamline your workflow and
 
 Before you begin, make sure you have [Oh My Zsh](https://ohmyz.sh/) installed, as an alias will be created in the `.zshrc` file.
 
-### Installation
+## Installation
 
-### Clone this repository to your local machine:
+# Clone this repository to your local machine:
 
    ```bash git clone https://github.com/yourusername/project-name.git```
 
