@@ -14,10 +14,11 @@ Before you begin, make sure you have [Oh My Zsh](https://ohmyz.sh/) installed, a
 
 1. Clone this repository to your local machine:
 
-```html
+```bash
 git clone https://github.com/Julian1612/ProjectCreator.git
 ```
 ### Navigate to the project directory:
+
 
 
 
