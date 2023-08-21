@@ -21,7 +21,7 @@ Before you begin, make sure you have [Oh My Zsh](https://ohmyz.sh/) installed, a
 git clone https://github.com/Julian1612/ProjectCreator.git
   </pre>
 </div>
-
+```
 ### Navigate to the project directory:
 
 
