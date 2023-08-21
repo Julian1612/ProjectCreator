@@ -44,9 +44,9 @@ Follow the instructions provided to set up your new project.
 ### Creating a New Class
 To create a new class, follow these steps:
 
-Open your terminal.
+1. Open your terminal.
 
-Navigate to the directory of your project.
+2. Navigate to the directory of your project.
 
 Run the following command:
 
