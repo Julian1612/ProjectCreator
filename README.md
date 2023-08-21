@@ -10,7 +10,7 @@ Before you begin, make sure you have [Oh My Zsh](https://ohmyz.sh/) installed, a
 
 ### Clone this repository to your local machine:
 
-   ### Installation
+### Installation
 
 1. Clone this repository to your local machine:
 
