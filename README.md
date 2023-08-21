@@ -61,7 +61,6 @@ If you're not using Oh My Zsh, you'll need to manually add the alias. Open your 
 ```bash
 alias create="path_to_the_main.py_from_this_project"
 ```
-Replace youralias with the desired alias and your_command_here with the actual command you want to alias.
 
 ### Creating a GitHub Access Token
 To interact with GitHub's API or perform actions on behalf of your account, you can create a personal access token:
