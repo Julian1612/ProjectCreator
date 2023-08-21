@@ -8,9 +8,19 @@ Before you begin, make sure you have [Oh My Zsh](https://ohmyz.sh/) installed, a
 
 ## Installation
 
-# Clone this repository to your local machine:
+### Clone this repository to your local machine:
 
-   ```bash git clone https://github.com/yourusername/project-name.git```
+   ### Installation
+
+1. Clone this repository to your local machine:
+
+```html
+<div class="copy-code-block">
+  <button class="copy-button" onclick="copyToClipboard('git-clone-command')">Copy</button>
+  <pre id="git-clone-command">
+git clone https://github.com/Julian1612/ProjectCreator.git
+  </pre>
+</div>
 
 ### Navigate to the project directory:
 
