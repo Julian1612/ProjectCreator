@@ -1,7 +1,19 @@
-Generate a New Personal Access Token:
+# ProjectCreator
 
-- Go to your GitHub account settings
-- Under "Developer settings", select "Personal access tokens"
-- Click on "Generate new token"
-- Give your token a name and select the required permissions (You just need to tick the first box)
-- Click "Generate token"
+Welcome to ProjectCreator! This is a useful tool to streamline your workflow and make project setup easier.
+
+## Getting Started
+
+Before you begin, make sure you have [Oh My Zsh](https://ohmyz.sh/) installed, as an alias will be created in the `.zshrc` file.
+
+### Installation
+
+### Clone this repository to your local machine:
+
+   ```bash
+   git clone https://github.com/yourusername/project-name.git
+
+### Navigate to the project directory:
+
+  ```bash 
+
