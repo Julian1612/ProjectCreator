@@ -10,7 +10,7 @@ Before you begin, make sure you have [Oh My Zsh](https://ohmyz.sh/) installed, a
 
 ### Clone this repository to your local machine:
 
-   ```git clone https://github.com/yourusername/project-name.git```
+   ```bash git clone https://github.com/yourusername/project-name.git```
 
 ### Navigate to the project directory:
 
