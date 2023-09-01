@@ -3,6 +3,8 @@ from gitHub import gitHub
 from makefile import makefile
 from basicStructure import basic
 import os
+import requests
+import json
 
 class cppProject(gitHub, makefile, basic):
 	def __init__(self, projectD: projectData):
@@ -27,6 +29,24 @@ class cppProject(gitHub, makefile, basic):
 		if (self.projectD.gitRepo == "y"):
 			self.pushToGitRepo()
 
+	@staticmethod
+	def getRandomCodingJoke():
+		url = "https://v2.jokeapi.dev/joke/programming?type=single"
+
+		try:
+			response = requests.get(url)
+			if response.status_code == 200:
+				jokeData = json.loads(response.text)
+				joke = jokeData.get("joke")
+				if '"' in joke:
+					joke = joke.replace('"', '\\"')
+				if '\n' in joke:
+					joke = joke.repalce('\n', '\n\t')
+				return joke
+		except Exception as e:
+			pass
+		return "Hello World!"
+
 	# create the source code files
 	def createSourceCodeFiles(self):
 		src_directory = f"./{self.projectD.projectName}/src"
@@ -37,17 +57,24 @@ class cppProject(gitHub, makefile, basic):
 			file = open(file_path, "w+")
 			if (self.projectD.nameSourceCodeFiles[i] == "main"):
 				with open(file_path, "w") as file:
-					file.write("#include <iostream>\n\nint main(int argc, char* argv[]) {\n\n\treturn 0;\n}\n")
-
+					file.write("#include <iostream>\n")
+					if (self.projectD.amountHeaderfiles > 0):
+						for i in range(self.projectD.amountHeaderfiles):
+							file.write(f"#include \"../includes/{self.projectD.namesHeaderfiles[i]}.h\"\n")
+					if (self.projectD.amountClasses > 0):
+						for i in range(self.projectD.amountClasses):
+							file.write(f"#include \"../includes/{self.projectD.classNames[i]}.h\"\n")
+					joke = cppProject.getRandomCodingJoke()
+					file.write(f"\nint main(void) {{\n\tstd::cout << \"{joke}\" << std::endl;\n\treturn 0;\n}}\n")
 			file.close()
 
 	# create the header files
 	def createHeaderFiles(self):
-		includesDirectory = f"./{self.projectD.projectName}/include"
+		includesDirectory = f"./{self.projectD.projectName}/includes"
 		if not os.path.exists(includesDirectory):
 			os.mkdir(includesDirectory)
 		for i in range(self.projectD.amountHeaderfiles):
-			file = open(f"./{self.projectD.projectName}/include/{self.projectD.namesHeaderfiles[i]}.h", "w+")
+			file = open(f"./{self.projectD.projectName}/includes/{self.projectD.namesHeaderfiles[i]}.h", "w+")
 			file.close()
 
 	# modify template cpp file
@@ -79,11 +106,11 @@ class cppProject(gitHub, makefile, basic):
 			modifiedTemplate = modifiedTemplate.replace("XXX", self.projectD.classNames[i].upper())
 			if (self.projectD.createClass == True):
 				currentDir = os.getcwd()
-				include_directory = f"{currentDir}/include"
+				include_directory = f"{currentDir}/includes"
 				with open(f"{include_directory}/{self.projectD.classNames[i]}.h", "w") as file:
 					file.write(modifiedTemplate)
 			else:
-				with open(f"./{self.projectD.projectName}/include/{self.projectD.classNames[i]}.h", "w") as file:
+				with open(f"./{self.projectD.projectName}/includes/{self.projectD.classNames[i]}.h", "w") as file:
 					file.write(modifiedTemplate)
 
 		# create classes
@@ -91,10 +118,10 @@ class cppProject(gitHub, makefile, basic):
 		if self.projectD.createClass:
 			currentDir = os.getcwd()
 			src_directory = f"{currentDir}/src"
-			include_directory = f"{currentDir}/include"
+			include_directory = f"{currentDir}/includes"
 		else:
 			src_directory = f"./{self.projectD.projectName}/src"
-			include_directory = f"./{self.projectD.projectName}/include"
+			include_directory = f"./{self.projectD.projectName}/includes"
 		if not os.path.exists(src_directory):
 			os.mkdir(src_directory)
 		if not os.path.exists(include_directory):

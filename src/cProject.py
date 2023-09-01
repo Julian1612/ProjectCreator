@@ -40,11 +40,11 @@ class cProject(gitHub, makefile, basic):
 
 	# create the header files
 	def createHeaderFiles(self):
-		includesDirectory = f"./{self.projectD.projectName}/include"
+		includesDirectory = f"./{self.projectD.projectName}/includes"
 		if not os.path.exists(includesDirectory):
 			os.mkdir(includesDirectory)
 		for i in range(self.projectD.amountHeaderfiles):
-			file = open(f"./{self.projectD.projectName}/include/{self.projectD.namesHeaderfiles[i]}.h", "w+")
+			file = open(f"./{self.projectD.projectName}/includes/{self.projectD.namesHeaderfiles[i]}.h", "w+")
 			file.close()
 
 	# modify template header file
@@ -55,6 +55,6 @@ class cProject(gitHub, makefile, basic):
 			with open(template_path, "r") as file:
 				data = file.read()
 			modifiedTemplate = data.replace("XXX", self.projectD.namesHeaderfiles[i].upper())
-			with open(f"./{self.projectD.projectName}/include/{self.projectD.namesHeaderfiles[i]}.h", "w") as file:
+			with open(f"./{self.projectD.projectName}/includes/{self.projectD.namesHeaderfiles[i]}.h", "w") as file:
 				file.write(modifiedTemplate)
 

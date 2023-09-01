@@ -14,7 +14,7 @@ class Xxx
 		~Xxx();
 
 		// Operators
-		Xxx & operator=(const Xxx &assign);
+		Xxx& operator=(const Xxx &assign);
 
 		// Getters / Setters
 
@@ -24,4 +24,4 @@ class Xxx
 
 };
 
-#endif
+#endif // XXX_H_
