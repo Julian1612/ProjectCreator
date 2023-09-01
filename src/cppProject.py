@@ -113,7 +113,7 @@ class cppProject(gitHub, makefile, basic):
 				with open(f"./{self.projectD.projectName}/includes/{self.projectD.classNames[i]}.h", "w") as file:
 					file.write(modifiedTemplate)
 
-		# create classes
+	# create classes
 	def createClasses(self):
 		if self.projectD.createClass:
 			currentDir = os.getcwd()

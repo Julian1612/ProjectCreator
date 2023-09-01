@@ -79,10 +79,14 @@ class projectData:
                 print("Invalid input. Please try again.")
 
     def getLanguage(self):
+        allowed_languages = ["C", "c", "cpp", "c++", "C++", "python", "Python"]
         while True:
             try:
-                self.language = input("Enter the programming language: ")
-                break
+                self.language = input("Enter the programming language: ").strip()
+                if self.language in allowed_languages:
+                    break
+                else:
+                    print("Invalid input. Please enter one of the allowed languages: C, C++, Python")
             except ValueError:
                 print("Invalid input. Please try again.")
 
