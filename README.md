@@ -56,7 +56,7 @@ class
 Follow the instructions provided to create a new class within your project.
 
 ## Note for Non-Oh-My-Zsh Users
-If you're not using Oh My Zsh, you'll need to manually add the alias. Open your shell configuration file (e.g., .bashrc, .bash_profile, or .zshrc) and add the following line:
+If you're not using Oh My Zsh (what you should definitely do), you'll need to manually add the alias. Open your shell configuration file (e.g., .bashrc, .bash_profile, or .zshrc) and add the following line:
 
 ```bash
 alias create="path_to_the_main.py_from_this_project"
