@@ -1,6 +1,6 @@
 # ProjectCreator
 
-Welcome to ProjectCreator! This is a useful tool to streamline your workflow and make project setup easier.
+Welcome to ProjectCreator! This is a handy tool designed to streamline your workflow and simplify project setup, specifically tailored for Python, C, and C++ projects.
 
 ## Getting Started
 
@@ -73,4 +73,4 @@ To interact with GitHub's API or perform actions on behalf of your account, you 
 Remember to keep your access token secure and do not share it publicly.
 
 # Contributing
-Contributions are welcome! If you find any issues or have ideas for improvements, feel free to submit a pull request.
+Contributions are welcome! If you find any issues, have ideas for improvements or want to add a nother language feel free to submit a pull request.
