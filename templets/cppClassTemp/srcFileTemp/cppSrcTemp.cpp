@@ -11,9 +11,8 @@ Xxx::Xxx(const Xxx &copy) {
 Xxx::~Xxx() {}
 
 // Operators
-Xxx::Xxx &operator=(const Xxx &assign) {
-	if (this != &assign) {
-	}
+Xxx& Xxx::operator=(const Xxx &assign) {
+	// if (this != &assign) {}
 	return *this;
 }
 
