@@ -7,7 +7,6 @@ import os
 class cProject(gitHub, makefile, basic):
 	def __init__(self, projectD: projectData):
 		self.projectD  = projectD
-
 	def createProject(self):
 		if (self.projectD.gitRepo == "y"):
 			if(self.createGitRepo() == False):

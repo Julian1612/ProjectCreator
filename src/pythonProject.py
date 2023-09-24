@@ -17,7 +17,6 @@ class pythonProject(gitHub, makefile, basic):
 		self.createSourceCodeFiles()
 		self.createReadme()
 		self.createGitignore()
-		self.createClasses()
 		self.createMakefile()
 		self.modifyTemplatePythonFile()
 		if (self.projectD.gitRepo == "y"):
