@@ -8,6 +8,7 @@ from pythonProject import pythonProject
 def searchForUpdates():
 	repository_url = "https://github.com/Julian1612/ProjectCreator.git"
 	local_directory = os.path.dirname(os.path.abspath(__file__))
+	print(local_directory[:-4])
 	os.chdir(local_directory)
 	current_branch = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip().decode("utf-8")
 	subprocess.run(["git", "fetch"])
