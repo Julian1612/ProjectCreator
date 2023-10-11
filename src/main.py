@@ -5,20 +5,20 @@ from cppProject import cppProject
 from cProject import cProject
 from pythonProject import pythonProject
 
-def searchForUpdates():
-	repository_url = "https://github.com/Julian1612/ProjectCreator.git"
-	local_directory = os.path.dirname(os.path.abspath(__file__))
-	print(local_directory[:-4])
-	os.chdir(local_directory)
-	current_branch = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip().decode("utf-8")
-	subprocess.run(["git", "fetch"])
-	compare_output = subprocess.check_output(["git", "rev-list", "--left-right", f"{current_branch}...origin/{current_branch}"]).strip().decode("utf-8")
-	if compare_output:
-		print("Local branch is behind. Pulling the latest changes...")
-		subprocess.run(["git", "pull"])
-		print("\033[32mUpdate complete.\033[0m")
+# def searchForUpdates():
+# 	repository_url = "https://github.com/Julian1612/ProjectCreator.git"
+# 	local_directory = os.path.dirname(os.path.abspath(__file__))
+# 	print(local_directory[:-4])
+# 	os.chdir(local_directory)
+# 	current_branch = subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"]).strip().decode("utf-8")
+# 	subprocess.run(["git", "fetch"])
+# 	compare_output = subprocess.check_output(["git", "rev-list", "--left-right", f"{current_branch}...origin/{current_branch}"]).strip().decode("utf-8")
+# 	if compare_output:
+# 		print("Local branch is behind. Pulling the latest changes...")
+# 		subprocess.run(["git", "pull"])
+# 		print("\033[32mUpdate complete.\033[0m")
 
-searchForUpdates()
+# searchForUpdates()
 projectD = projectData(True)
 if (projectD.language == "cpp" or
 	projectD.language == "c++" or
